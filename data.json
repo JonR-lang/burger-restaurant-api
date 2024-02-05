@@ -1,0 +1,554 @@
+[
+  {
+    "name": "Classic Beef Burger",
+
+    "description": "Enter the 'Midnight Beast' – a mysteriously tantalizing fusion of dark-seasoned beef, nestled amid crisp black lettuce and blood-red tomato. Topped with tangy pickles that whisper secrets of flavor, this creation beckons the curious into a shadowy journey of taste. Perfectly sized for solo exploration, it's gluten-free and keto-friendly, inviting brave souls to savor the enigmatic depths of flavor beneath the moonlit sky.",
+
+    "price": 9.99,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Lettuce", "type": "Vegetable" },
+
+      { "name": "Tomato", "type": "Vegetable" },
+
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Gluten-Free", "Keto-Friendly"],
+
+    "image": "classic-beef-burger.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Sizzling BBQ Bliss",
+
+    "description": "Embrace the 'Sizzling BBQ Bliss' – a classic burger igniting your taste buds with smoky BBQ allure. A beef patty kissed by caramelized onions and harmonized by tangy BBQ sauce. Crafted for individual indulgence, this dairy-free delight beckons all seeking a savory escape into smoky ecstasy.",
+
+    "price": 8.49,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Caramelized Onions", "type": "Vegetable" },
+
+      { "name": "BBQ Sauce", "type": "Sauce" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Dairy-Free"],
+
+    "image": "sizzling-bbq-bliss.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Fiery Jalapeño Inferno",
+
+    "description": "Unleash your taste buds into the 'Fiery Jalapeño Inferno' – a classic burger ablaze with a fiery fusion of flavors. Imagine sinking your teeth into a flame-seared beef patty, embraced by the tantalizing heat of roasted jalapeños, each fiery bite complemented by a chorus of melted pepper jack cheese. As the inferno dances on your palate, the smoky whispers of chipotle mayo join the spicy symphony, enriching every savory sensation. Embrace the heat, as this burger beckons the bold-hearted adventurers into a fiery dance of tantalizing tastes.",
+
+    "price": 10.99,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Roasted Jalapeños", "type": "Vegetable" },
+
+      { "name": "Pepper Jack Cheese", "type": "Dairy" },
+
+      { "name": "Chipotle Mayo", "type": "Sauce" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Spicy"],
+
+    "image": "fiery-jalapeno-inferno.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Savory Protein Paradise",
+
+    "description": "Experience the 'Savory Protein Paradise,' a classic burger crafted for keto enthusiasts. A succulent beef patty graced by crispy bacon, enveloped in a keto-friendly lettuce wrap, promises an explosion of flavor without compromising your diet.",
+
+    "price": 12.99,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Crispy Bacon", "type": "Meat" },
+
+      { "name": "Lettuce", "type": "Vegetable" },
+
+      { "name": "Tomato", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Keto-Friendly"],
+
+    "image": "savory-protein-paradise.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Harmony Plant Medley",
+
+    "description": "Elevate your taste experience with the 'Harmony Plant Medley,' a classic burger designed for the vegan soul. A symphony of plant-based delights, featuring a duo of black bean patties, complemented by avocado slices, nestled in a vegan brioche bun.",
+
+    "price": 10.49,
+
+    "ingredients": [
+      { "name": "Black Bean Patties", "type": "Vegetable" },
+
+      { "name": "Avocado", "type": "Vegetable" },
+
+      { "name": "Vegan Brioche Bun", "type": "Bread" },
+
+      { "name": "Lettuce", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Double",
+
+    "dietaryPreferences": ["Vegan"],
+
+    "image": "harmony-plant-medley.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Triple Flavor Symphony",
+
+    "description": "Unleash the 'Triple Flavor Symphony,' a classic burger designed for gluten-sensitive palates. A triumvirate of succulent beef patties, crowned with melted Swiss cheese and nestled between gluten-free artisanal buns, invites you on a gluten-free epicurean adventure.",
+
+    "price": 15.99,
+
+    "ingredients": [
+      { "name": "Beef Patties", "type": "Protein" },
+
+      { "name": "Swiss Cheese", "type": "Dairy" },
+
+      { "name": "Gluten-Free Artisanal Buns", "type": "Bread" },
+
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Triple",
+
+    "dietaryPreferences": ["Gluten-Free"],
+
+    "image": "triple-flavor-symphony.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Herbivore's Delight",
+
+    "description": "Indulge in the 'Herbivore's Delight,' a classic burger curated for both vegan and gluten-sensitive palates. A succulent plant-based patty, adorned with roasted vegetables and nestled between gluten-free artisanal buns, promises a symphony of flavors for the discerning diner.",
+
+    "price": 11.99,
+
+    "ingredients": [
+      { "name": "Plant-Based Patty", "type": "Vegetable" },
+
+      { "name": "Roasted Vegetables", "type": "Vegetable" },
+
+      { "name": "Gluten-Free Artisanal Buns", "type": "Bread" },
+
+      { "name": "Vegan Cheese", "type": "Dairy" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Vegan", "Gluten-Free"],
+
+    "image": "herbivores-delight.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Trio Meat Melody",
+
+    "description": "Savor the 'Trio Meat Melody,' a classic burger designed for those craving a gluten-free delight. A symphony of beef, chicken, and turkey patties, orchestrated with Swiss cheese and cradled between gluten-free artisanal buns, offers a harmonious trio of meaty goodness.",
+
+    "price": 13.49,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Chicken Patty", "type": "Protein" },
+
+      { "name": "Turkey Patty", "type": "Protein" },
+
+      { "name": "Swiss Cheese", "type": "Dairy" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Double",
+
+    "dietaryPreferences": ["Gluten-Free"],
+
+    "image": "trio-meat-melody.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Protein Powerhouse Trio",
+
+    "description": "Enter the 'Protein Powerhouse Trio,' a classic burger tailored for keto enthusiasts seeking a protein-packed adventure. Three succulent beef patties, layered with crispy bacon and cheddar, harmonize within a keto-friendly ensemble, inviting you on a high-protein escapade.",
+
+    "price": 16.99,
+
+    "ingredients": [
+      { "name": "Beef Patties", "type": "Protein" },
+
+      { "name": "Crispy Bacon", "type": "Meat" },
+
+      { "name": "Cheddar Cheese", "type": "Dairy" },
+
+      { "name": "Lettuce", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Triple",
+
+    "dietaryPreferences": ["Keto-Friendly"],
+
+    "image": "protein-powerhouse-trio.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Green Goddess Delight",
+
+    "description": "Indulge in the 'Green Goddess Delight,' a classic burger tailored for the vegan connoisseur. Featuring a plant-based patty crowned with a medley of garden-fresh greens, this vegan delight nestled in a soft bun invites you to savor the verdant flavors of nature.",
+
+    "price": 10.99,
+
+    "ingredients": [
+      { "name": "Plant-Based Patty", "type": "Vegetable" },
+
+      { "name": "Mixed Greens", "type": "Vegetable" },
+
+      { "name": "Soft Bun", "type": "Bread" },
+
+      { "name": "Vegan Cheese", "type": "Dairy" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Vegan"],
+
+    "image": "green-goddess-delight.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Low-Carb Duo Delight",
+
+    "description": "Savor the 'Low-Carb Duo Delight,' a classic burger designed for both keto and gluten-sensitive aficionados. A duo of beef patties, wrapped in lettuce and crowned with keto-friendly cheese, invites you on a low-carb journey without compromising on flavor.",
+
+    "price": 13.49,
+
+    "ingredients": [
+      { "name": "Beef Patties", "type": "Protein" },
+
+      { "name": "Lettuce Wrap", "type": "Vegetable" },
+
+      { "name": "Keto-Friendly Cheese", "type": "Dairy" },
+
+      { "name": "Tomato", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Double",
+
+    "dietaryPreferences": ["Keto-Friendly", "Gluten-Free"],
+
+    "image": "low-carb-duo-delight.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Triple Protein Extravaganza",
+
+    "description": "Dive into the 'Triple Protein Extravaganza,' a classic burger tailor-made for gluten-sensitive palates. Three succulent protein-packed patties, embraced by gluten-free buns and crowned with a medley of savory delights, promises a flavor-packed gluten-free feast.",
+
+    "price": 15.99,
+
+    "ingredients": [
+      { "name": "Beef Patties", "type": "Protein" },
+
+      { "name": "Gluten-Free Buns", "type": "Bread" },
+
+      { "name": "Cheddar Cheese", "type": "Dairy" },
+
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Triple",
+
+    "dietaryPreferences": ["Gluten-Free"],
+
+    "image": "triple-protein-extravaganza.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Bacon Bliss Wrap",
+
+    "description": "Experience the 'Bacon Bliss Wrap,' a classic burger crafted for keto enthusiasts. A succulent beef patty graced by crispy bacon, enveloped in a keto-friendly lettuce wrap, promises an explosion of flavor without compromising your diet.",
+
+    "price": 12.99,
+
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+
+      { "name": "Crispy Bacon", "type": "Meat" },
+
+      { "name": "Lettuce", "type": "Vegetable" },
+
+      { "name": "Tomato", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Single",
+
+    "dietaryPreferences": ["Keto-Friendly"],
+
+    "image": "bacon-bliss-wrap.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Verdant Duo Delight",
+
+    "description": "Elevate your taste experience with the 'Verdant Duo Delight,' a classic burger designed for the vegan soul. A symphony of plant-based delights, featuring a duo of black bean patties, complemented by avocado slices, nestled in a vegan brioche bun.",
+
+    "price": 10.49,
+
+    "ingredients": [
+      { "name": "Black Bean Patties", "type": "Vegetable" },
+
+      { "name": "Avocado", "type": "Vegetable" },
+
+      { "name": "Vegan Brioche Bun", "type": "Bread" },
+
+      { "name": "Lettuce", "type": "Vegetable" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Double",
+
+    "dietaryPreferences": ["Vegan"],
+
+    "image": "verdant-duo-delight.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+
+  {
+    "name": "Beef Trilogy",
+
+    "description": "Unleash the 'Beef Trilogy,' a classic burger designed for gluten-sensitive palates. A triumvirate of succulent beef patties, crowned with melted Swiss cheese and nestled between gluten-free artisanal buns, invites you on a gluten-free epicurean adventure.",
+
+    "price": 15.99,
+
+    "ingredients": [
+      { "name": "Beef Patties", "type": "Protein" },
+
+      { "name": "Swiss Cheese", "type": "Dairy" },
+
+      { "name": "Gluten-Free Artisanal Buns", "type": "Bread" },
+
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+
+    "burgerType": "Classic",
+
+    "size": "Triple",
+
+    "dietaryPreferences": ["Gluten-Free"],
+
+    "image": "beef-trilogy.png",
+
+    "sold": 38,
+
+    "ratings": []
+  },
+  {
+    "name": "Mystic Crimson Burger",
+    "description": "Behold the 'Mystic Crimson' – a bewitching creation that defies ordinary tastes. Embrace the crimson allure of seasoned beef, nestled amid the mystical leaves that whisper secrets of an unknown realm. Adorned with a bun painted in a shade of red, sprinkled with enigmatic white powders, this burger invites adventurous souls to embark on a flavorful journey shrouded in mystery. Perfectly sized for solo indulgence, it carries the thrill of the unknown beneath its mesmerizing facade.",
+    "price": 10.99,
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+      { "name": "Mystic Leaves", "type": "Unknown" },
+      { "name": "Tomato", "type": "Vegetable" },
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+    "burgerType": "Gourmet",
+    "size": "Single",
+    "dietaryPreferences": ["Keto-Friendly", "Dairy"],
+    "image": "mystic-crimson-burger.png",
+    "sold": 38,
+    "ratings": []
+  },
+  {
+    "name": "Shadow Veil Burger",
+    "description": "Enter the 'Shadow Veil' – a culinary enigma cloaked in darkness. Within its ebony embrace lies seasoned beef, obscured by a mystic black bun that whispers of hidden flavors. Each bite unveils a tantalizing journey through contrasting textures and elusive tastes. Perfectly sized for solo indulgence, this singular creation invites the curious to explore the ever-shifting realms of flavor beneath its shadowy facade.",
+    "price": 10.99,
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+      { "name": "Mystic Black Bun", "type": "Bread" },
+      { "name": "Tomato", "type": "Vegetable" },
+      { "name": "Pickles", "type": "Condiment" }
+    ],
+    "burgerType": "Specialty",
+    "size": "Single",
+    "dietaryPreferences": ["Keto-Friendly", "Organic", "Gluten-Free"],
+    "image": "shadow-veil-burger.png",
+    "sold": 38,
+    "ratings": []
+  },
+  {
+    "name": "Savory Smooth Eclipse",
+    "description": "Introducing the 'Savory Smooth Eclipse' – a culinary marvel that defies norms. Within its exquisite ensemble lies a seasoned beef delight, resting atop a sleek and velvety smooth bun that promises a textural journey unlike any other. Embrace the fusion of flavors as each bite unfolds a symphony of tastes. Crafted for solo indulgence, this creation beckons both epicureans and aficionados to revel in its harmonious blend of ingredients.",
+    "price": 12.49,
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+      { "name": "Smooth Bun", "type": "Bread" },
+      { "name": "Lettuce", "type": "Vegetable" },
+      { "name": "Tomato", "type": "Vegetable" },
+      { "name": "Special Sauce", "type": "Condiment" }
+    ],
+    "burgerType": "Gourmet",
+    "size": "Single",
+    "dietaryPreferences": ["Gluten-Free", "Low-Carb"],
+    "image": "savory-smooth-eclipse.png",
+    "sold": 38,
+    "ratings": []
+  },
+  {
+    "name": "Wholesome Harvest Delight",
+    "description": "Behold the 'Wholesome Harvest Delight' – an embodiment of nature's bounty. Featuring a symphony of flavors, this creation harmonizes seasoned beef with a medley of farm-fresh produce nestled within a rustic, whole-grain bun. Each bite unveils the essence of a rich harvest, inviting patrons to savor the wholesome goodness and celebrate the marriage of earthy flavors. Crafted exclusively for the discerning palate, it promises a gratifying culinary experience.",
+    "price": 13.99,
+    "ingredients": [
+      { "name": "Beef Patty", "type": "Protein" },
+      { "name": "Whole-Grain Bun", "type": "Bread" },
+      { "name": "Mixed Greens", "type": "Vegetable" },
+      { "name": "Roasted Tomato", "type": "Vegetable" },
+      { "name": "Avocado Spread", "type": "Condiment" }
+    ],
+    "burgerType": "Specialty",
+    "size": "Single",
+    "dietaryPreferences": ["Organic", "Gluten-Free", "Dairy-Free"],
+    "image": "wholesome-harvest-delight.png",
+    "sold": 38,
+    "ratings": []
+  },
+  {
+    "name": "Sizzling Double Gastronome",
+    "description": "Indulge in the 'Sizzling Double Gastronome' – a symphony of flavors in a towering masterpiece. Featuring a double portion of seasoned beef, this culinary delight is encased within a lightly toasted artisanal bun. Each layer harmonizes with tangy relish, garden-fresh greens, and a secret house sauce, promising an explosion of taste in every bite. Crafted for the hearty appetite, it beckons connoisseurs to relish the opulent blend of savory delights.",
+    "price": 16.99,
+    "ingredients": [
+      { "name": "Double Beef Patty", "type": "Protein" },
+      { "name": "Artisanal Bun", "type": "Bread" },
+      { "name": "Lettuce", "type": "Vegetable" },
+      { "name": "Tomato", "type": "Vegetable" },
+      { "name": "Special House Sauce", "type": "Condiment" }
+    ],
+    "burgerType": "Gourmet",
+    "size": "Double",
+    "dietaryPreferences": ["Gluten-Free", "Keto-Friendly"],
+    "image": "sizzling-double-gastronome.png",
+    "sold": 38,
+    "ratings": []
+  },
+  {
+    "name": "Zen Garden Harmony",
+    "description": "Step into the 'Zen Garden Harmony' – a serene blend of flavors and textures. Crafted with a plant-based, meat-like substitute made from soy protein, this creation rests within a gluten-free, rice flour bun. Each bite reveals a tranquil harmony of tastes, inviting vegans to relish the essence of nature's bounty. Tailored for the discerning palate, it offers a peaceful escape into a world of culinary bliss.",
+    "price": 15.99,
+    "ingredients": [
+      { "name": "Soy Protein Substitute", "type": "Protein" },
+      { "name": "Rice Flour Bun", "type": "Bread" },
+      { "name": "Mixed Garden Vegetables", "type": "Vegetable" },
+      { "name": "Sesame-Ginger Dressing", "type": "Condiment" }
+    ],
+    "burgerType": "Specialty",
+    "size": "Single",
+    "dietaryPreferences": ["Vegan", "Gluten-Free", "Organic"],
+    "image": "zen-garden-delight.png",
+    "sold": 38,
+    "ratings": []
+  }
+]
