@@ -1,5 +1,5 @@
 const Blog = require("../models/Blog");
-const User = require("../models/User");
+const validateMongodbId = require("../utils/validateMongoDbId");
 const validateMongoDbId = require("../utils/validateMongoDbId");
 
 //CREATE BLOG
@@ -23,7 +23,7 @@ module.exports.createBlog = async (req, res) => {
 //GET ALL BLOGS
 module.exports.getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find().populate("author", "firstName lastName");
+    const blogs = await Blog.find({});
     res.status(200).json(blogs);
   } catch (error) {
     console.log(error);
@@ -31,12 +31,28 @@ module.exports.getAllBlogs = async (req, res) => {
   }
 };
 
-module.exports.updateBlog = async (req, res) => {
+//GET BLOG
+module.exports.getBlog = async (req, res) => {
   const { id } = req.params;
-  const { title, body, category, picturePath } = req.body;
   try {
     validateMongoDbId(id, "Blog");
-    const blog = await User.findByIdAndUpdate(
+    let blog = await Blog.findById(id);
+    if (!blog) throw new Error("Blog not found");
+    blog.views++;
+    blog = await blog.save();
+    res.status(200).json(blog);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
+//UPDATE BLOG
+module.exports.updateBlog = async (req, res) => {
+  const { id } = req.params;
+  const { title, body, category, picturePath, author } = req.body;
+  try {
+    validateMongoDbId(id, "Blog");
+    const blog = await Blog.findByIdAndUpdate(
       id,
       {
         title,
@@ -47,9 +63,47 @@ module.exports.updateBlog = async (req, res) => {
       },
       { new: true }
     );
-    if (!blog) throw new Error();
+    if (!blog) throw new Error("Blog not found!");
+    res.status(200).json(blog);
   } catch (error) {
     console.log(error);
     res.status(401).json({ error: error.message });
+  }
+};
+
+//LIKE
+module.exports.toggleLike = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user._id;
+  try {
+    validateMongodbId(id, "Blog");
+    validateMongodbId(id, "User");
+    let blog = await Blog.findById(id);
+    if (blog.likes.includes(userId)) {
+      //remove userId from array of likes
+      blog.likes = blog.likes.filter((item) => item.toString() !== userId);
+    } else {
+      //add userId to the array of likes
+      blog.likes.push(userId);
+    }
+    const updatedBlog = await blog.save();
+    res.status(201).json(updatedBlog);
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ error: error.message });
+  }
+};
+
+//DELETE BLOG
+module.exports.deleteBlog = async (req, res) => {
+  const { id } = req.params;
+  try {
+    validateMongodbId(id, "Blog");
+    const blog = await Blog.findByIdAndDelete(id);
+    if (!blog) throw new Error("Blog not found");
+    res.status(200).json({ message: "Blog successfully deleted" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
   }
 };

@@ -9,6 +9,7 @@ const {
   deleteUser,
   updateUser,
   toggleBlockUser,
+  toggleWishlist,
 } = require("../controllers/userController");
 
 // ===========================
@@ -27,5 +28,6 @@ router.delete("/:id", verifyToken, isAdmin, deleteUser);
 // ===========================
 router.put("/:id", updateUser);
 router.put("/block-user/:id", verifyToken, isAdmin, toggleBlockUser);
+router.patch("/wishlist/:id", verifyToken, toggleWishlist);
 
 module.exports = router;

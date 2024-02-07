@@ -8,6 +8,8 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const blogRoutes = require("./routes/blogRoutes");
+const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
+const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -31,6 +33,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 
 app.use("/api/blogs", blogRoutes);
+
+app.use("/api/burger-types", burgerTypeRoutes);
+
+app.use("/api/blog-categories", blogCategoryRoutes);
 
 const PORT = process.env.PORT || 8080;
 

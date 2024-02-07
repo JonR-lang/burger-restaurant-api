@@ -41,7 +41,7 @@ const productSchema = Schema(
     },
     burgerType: {
       type: Schema.Types.ObjectId,
-      ref: "Category",
+      ref: "BurgerType",
     },
     dietaryPreferences: {
       type: [
@@ -67,6 +67,10 @@ const productSchema = Schema(
         postedBy: { type: Schema.Types.ObjectId, ref: "User" },
       },
     ],
+    totalRatings: {
+      type: Number,
+      default: 0,
+    },
     sold: {
       type: Number,
       default: 0,

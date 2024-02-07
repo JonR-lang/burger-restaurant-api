@@ -11,7 +11,8 @@ const blogSchema = Schema(
       required: [true, "This field is required!"],
     },
     category: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "BlogCategory",
     },
     views: {
       type: Number,

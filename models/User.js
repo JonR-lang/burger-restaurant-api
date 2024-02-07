@@ -81,8 +81,8 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.virtual("fullName").get(function () {
-  return `${this.get(firstName)} ${this.get(lastName)} `;
+userSchema.virtual("fullName").get(function (value, virtual, doc) {
+  return `${this.firstName} ${this.lastName} `;
 }); //This is to get the fullName of the user, despite it not being a property which is saved to the database
 
 userSchema.methods.isPasswordMatched = async function (enteredPassword) {

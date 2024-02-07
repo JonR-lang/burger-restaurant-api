@@ -6,6 +6,7 @@ const {
   getAllProducts,
   updateProduct,
   deleteProduct,
+  rateProduct,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.get("/", getAllProducts);
 router.get("/:id", getSingleProduct);
 
 //UPDATE
+router.put("/ratings/:id", verifyToken, rateProduct);
 router.put("/:id", verifyToken, isAdmin, updateProduct);
 
 //DELETE

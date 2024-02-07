@@ -55,7 +55,6 @@ module.exports.getAllProducts = async (req, res) => {
     const queryObject = JSON.parse(queryString);
 
     let query = Product.find(queryObject);
-    console.log("Query: ", query);
 
     //SORTING
     const { sort } = req.query;
@@ -123,7 +122,6 @@ module.exports.updateProduct = async (req, res) => {
     quantity,
     burgerType,
     dietaryPreferences,
-    sold,
     size,
   } = req.body;
   try {
@@ -152,6 +150,35 @@ module.exports.updateProduct = async (req, res) => {
   }
 };
 
+module.exports.rateProduct = async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user._id;
+  const { star } = req.body;
+  try {
+    validateMongoDbId(id, "Product");
+    const product = await Product.findById(id);
+    if (!product) throw new Error("Product not found!");
+    const existingRating = product.ratings.find(
+      (rating) => rating.postedBy.toString() === userId.toString()
+    );
+    existingRating
+      ? (existingRating.star = star)
+      : product.ratings.push({ star, postedBy: userId });
+
+    const totalStars = product.ratings.reduce(
+      (acc, rating) => acc + rating.star,
+      0
+    );
+    const averageRating = parseInt(totalStars) / product.ratings.length;
+    product.totalRatings = averageRating;
+    const updatedProduct = await product.save();
+    res.status(201).json(updatedProduct);
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ error: error.message });
+  }
+};
+
 //DELETE
 module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
@@ -165,3 +192,10 @@ module.exports.deleteProduct = async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 };
+
+// const myArray = [
+//   { id: 1, name: "john" },
+//   { id: 2, name: "NJideka" },
+//   { id: 3, name: "doe" },
+// ];
+// const totalStars = myArray.reduce((acc, user) => console.log(acc, user));
