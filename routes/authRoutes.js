@@ -8,6 +8,7 @@ const {
   updatePassword,
   forgotPasswordToken,
   resetPassword,
+  adminLogin,
 } = require("../controllers/authController");
 const { verifyToken } = require("../middleware/authMiddleware");
 
@@ -17,6 +18,7 @@ const { verifyToken } = require("../middleware/authMiddleware");
 
 router.post("/register", createUser);
 router.post("/login", logIn);
+router.post("/admin-login", adminLogin);
 
 //REFRESHTOKEN
 router.get("/refresh-token", handleRefreshToken);

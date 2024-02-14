@@ -1,5 +1,7 @@
 const express = require("express");
 const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
+const upload = require("../middleware/multer");
+
 const {
   createProduct,
   getSingleProduct,
@@ -12,15 +14,15 @@ const {
 const router = express.Router();
 
 //CREATE
-router.post("/", verifyToken, isAdmin, createProduct);
+router.post("/", upload.any(), verifyToken, isAdmin, createProduct);
 
 //READ
 router.get("/", getAllProducts);
 router.get("/:id", getSingleProduct);
 
 //UPDATE
+router.put("/:id", upload.any(), verifyToken, isAdmin, updateProduct);
 router.put("/ratings/:id", verifyToken, rateProduct);
-router.put("/:id", verifyToken, isAdmin, updateProduct);
 
 //DELETE
 router.delete("/:id", verifyToken, isAdmin, deleteProduct);

@@ -67,6 +67,49 @@ module.exports.logIn = async (req, res) => {
   }
 };
 
+//ADMIN LOG IN
+
+module.exports.adminLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("User does not exist");
+
+    if (user.role !== "admin")
+      throw new Error("User is not admin. Not authorized");
+
+    const isMatched = await user.isPasswordMatched(password);
+    if (!isMatched) throw new Error("Invalid user credentials");
+    const refreshToken = generateRefreshToken(user._id);
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
+      {
+        refreshToken,
+      },
+      { new: true }
+    );
+    res
+      .cookie("refreshToken", refreshToken, {
+        maxAge: 1000 * 60 * 60 * 24 * 5, //5 days
+        httpOnly: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(201)
+      .json({
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        mobile: user.mobile,
+        role: user.role,
+        accessToken: generateAccessToken(user._id),
+      });
+  } catch (err) {
+    const errors = handleError(err);
+    res.status(401).json({ errors });
+    console.log(err);
+  }
+};
+
 // HANDLE REFRESH TOKEN
 
 module.exports.handleRefreshToken = async (req, res) => {

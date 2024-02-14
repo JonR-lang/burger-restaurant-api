@@ -10,6 +10,12 @@ const productRoutes = require("./routes/productRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
 const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
+const couponRoutes = require("./routes/couponRoutes");
+//
+// const cloudinaryUpload = require("./utils/cloudinary");
+// const upload = require("./middleware/multer");
+// const { productImageResize } = require("./middleware/uploadImgMiddleware");
+
 require("dotenv").config();
 
 const app = express();
@@ -26,6 +32,19 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is up and running");
 });
 
+// app.post("/upload", upload.any(), async (req, res) => {
+//   try {
+//     console.log("BODY: ", req.body.title);
+//     // console.log("FILE: ", req.files);
+//     const result = await cloudinaryUpload(req.files);
+//     // console.log(result);
+//     res.status(201).json(result);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(401).json({ error: error.message });
+//   }
+// });
+
 app.use("/api/auth", authRoutes);
 
 app.use("/api/users", userRoutes);
@@ -37,6 +56,8 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/burger-types", burgerTypeRoutes);
 
 app.use("/api/blog-categories", blogCategoryRoutes);
+
+app.use("/api/coupons", couponRoutes);
 
 const PORT = process.env.PORT || 8080;
 

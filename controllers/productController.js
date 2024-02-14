@@ -1,6 +1,6 @@
-const { query } = require("express");
 const Product = require("../models/Product");
 const validateMongoDbId = require("../utils/validateMongoDbId");
+const { cloudinaryUpload, cloudinaryDestroy } = require("../utils/cloudinary");
 
 //CREATE
 module.exports.createProduct = async (req, res) => {
@@ -9,26 +9,24 @@ module.exports.createProduct = async (req, res) => {
     description,
     price,
     ingredients,
-    images,
     quantity,
     burgerType,
     dietaryPreferences,
-    sold,
     size,
   } = req.body;
 
   try {
+    const imageURIs = await cloudinaryUpload(req.files, "Products");
     const product = await Product.create({
       name,
       slug: name,
       description,
       price,
       ingredients,
-      images,
+      images: imageURIs,
       quantity,
       burgerType,
       dietaryPreferences,
-      sold,
       size,
     });
     res.status(201).json(product);
@@ -118,22 +116,40 @@ module.exports.updateProduct = async (req, res) => {
     description,
     price,
     ingredients,
-    images,
     quantity,
     burgerType,
     dietaryPreferences,
+    sold,
     size,
   } = req.body;
+
   try {
     validateMongoDbId(id, "Product");
-    const product = await Product.findByIdAndUpdate(
+    const product = await Product.findById(id);
+    if (!product) throw new Error("Product not found");
+
+    //The code below initializes the variable imageURIs, if the req.files.length is greater than zero, the imageURIs becomes the result of the upload of the image files to cloudinary. This also means that if from the front end, during the update request, image files are not sent alongside, the images are not changed. Remember if a you set a value to undefined in mongodb, the initial values rename the same. I am just taking advantage of this behaviour.
+
+    let imageURIs;
+    if (req.files && req.files.length > 0) {
+      let imagePublicIds = product.images.map(
+        (arrayImage) => arrayImage.publicId
+      );
+      if (!imagePublicIds[0]) {
+        imagePublicIds = null;
+      }
+      await cloudinaryDestroy(imagePublicIds);
+      imageURIs = await cloudinaryUpload(req.files, "Products");
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
       id,
       {
         name,
         description,
         price,
         ingredients,
-        images,
+        images: imageURIs,
         quantity,
         burgerType,
         dietaryPreferences,
@@ -142,8 +158,9 @@ module.exports.updateProduct = async (req, res) => {
       },
       { new: true }
     );
-    if (!product) throw new Error("Product not found. Recheck product Id");
-    res.status(201).json(product);
+    if (!updatedProduct)
+      throw new Error("Product not found. Recheck product Id");
+    res.status(201).json(updatedProduct);
   } catch (error) {
     console.log(error);
     res.status(404).json({ error: error.message });
@@ -153,7 +170,7 @@ module.exports.updateProduct = async (req, res) => {
 module.exports.rateProduct = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
-  const { star } = req.body;
+  const { star, comment } = req.body;
   try {
     validateMongoDbId(id, "Product");
     const product = await Product.findById(id);
@@ -162,8 +179,8 @@ module.exports.rateProduct = async (req, res) => {
       (rating) => rating.postedBy.toString() === userId.toString()
     );
     existingRating
-      ? (existingRating.star = star)
-      : product.ratings.push({ star, postedBy: userId });
+      ? ((existingRating.star = star), (existingRating.comment = comment))
+      : product.ratings.push({ star, comment, postedBy: userId });
 
     const totalStars = product.ratings.reduce(
       (acc, rating) => acc + rating.star,
@@ -184,18 +201,21 @@ module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
     validateMongoDbId(id, "Product");
-    const product = await Product.findByIdAndDelete(id);
+    const product = await Product.findById(id);
     if (!product) throw new Error("Product not found. Recheck product Id");
+    let imagePublicIds = product.images.map(
+      (arrayImage) => arrayImage.publicId
+    );
+
+    if (!imagePublicIds[0]) {
+      imagePublicIds = null;
+    } //This line of code checks if the array returned above contains a falsy value. If it does, we just change it to null, so that the cloudinary destroy function would handlw it better.
+
+    await cloudinaryDestroy(imagePublicIds);
+    await Product.findByIdAndDelete(id);
     res.status(200).json({ message: "Product has been deleted successfully." });
   } catch (error) {
     console.log(error);
     res.status(404).json({ error: error.message });
   }
 };
-
-// const myArray = [
-//   { id: 1, name: "john" },
-//   { id: 2, name: "NJideka" },
-//   { id: 3, name: "doe" },
-// ];
-// const totalStars = myArray.reduce((acc, user) => console.log(acc, user));

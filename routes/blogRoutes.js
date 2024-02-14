@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const router = Router();
+const upload = require("../middleware/multer");
+
 const {
   createBlog,
   getAllBlogs,
@@ -11,10 +13,10 @@ const {
 const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
 
 //CREATE
-router.post("/", verifyToken, isAdmin, createBlog);
+router.post("/", upload.any(), verifyToken, isAdmin, createBlog);
 
 //UPDATE
-router.put("/:id", verifyToken, isAdmin, updateBlog);
+router.put("/:id", upload.any(), verifyToken, isAdmin, updateBlog);
 router.patch("/likes/:id", verifyToken, toggleLike);
 
 //READ

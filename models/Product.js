@@ -31,13 +31,17 @@ const productSchema = Schema(
       },
     ],
     images: {
-      type: [String],
+      type: [
+        {
+          url: String,
+          publicId: String,
+        },
+      ],
       required: [true, "Please put an image for this product"],
     },
     quantity: {
       type: Number,
       required: [true, "This field is required"],
-      default: 0,
     },
     burgerType: {
       type: Schema.Types.ObjectId,
@@ -64,6 +68,10 @@ const productSchema = Schema(
     ratings: [
       {
         star: Number,
+        comment: {
+          type: String,
+          default: "",
+        },
         postedBy: { type: Schema.Types.ObjectId, ref: "User" },
       },
     ],

@@ -18,10 +18,22 @@ const blogSchema = Schema(
       type: Number,
       default: 0,
     },
-    picturePath: {
-      type: String,
-      default:
-        "https://media.istockphoto.com/id/922745190/photo/blogging-blog-concepts-ideas-with-worktable.jpg?s=612x612&w=0&k=20&c=xR2vOmtg-N6Lo6_I269SoM5PXEVRxlgvKxXUBMeMC_A=",
+    images: {
+      type: [
+        {
+          url: {
+            type: String,
+          },
+          publicId: {
+            type: String,
+          },
+        },
+      ],
+      default: [
+        {
+          url: "https://media.istockphoto.com/id/922745190/photo/blogging-blog-concepts-ideas-with-worktable.jpg?s=612x612&w=0&k=20&c=xR2vOmtg-N6Lo6_I269SoM5PXEVRxlgvKxXUBMeMC_A=",
+        },
+      ],
     },
     likes: [
       {
