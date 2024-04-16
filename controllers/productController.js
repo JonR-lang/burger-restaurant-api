@@ -9,6 +9,7 @@ module.exports.createProduct = async (req, res) => {
     description,
     price,
     ingredients,
+    featured,
     quantity,
     burgerType,
     dietaryPreferences,
@@ -17,12 +18,14 @@ module.exports.createProduct = async (req, res) => {
 
   try {
     const imageURIs = await cloudinaryUpload(req.files, "Products");
+    console.log(imageURIs);
     const product = await Product.create({
       name,
       slug: name,
       description,
       price,
       ingredients,
+      featured,
       images: imageURIs,
       quantity,
       burgerType,
@@ -37,6 +40,7 @@ module.exports.createProduct = async (req, res) => {
 
 //READ
 module.exports.getAllProducts = async (req, res) => {
+  console.log(req.query);
   try {
     //I want you to note that not attaching await to the find method on the products, returns a query object in which you can use mongoDB native query methods on. Attaching await just means that you want to return the result.
     //Some of these mongodb methods include sort, limit, skip.
@@ -47,9 +51,10 @@ module.exports.getAllProducts = async (req, res) => {
     excludedFields.forEach((field) => delete queryObj[field]);
     let queryString = JSON.stringify(queryObj);
     queryString = queryString.replace(
-      /\b(gte|gt|lte|lt)\b/g,
+      /\b(gte|gt|lte|lt|in)\b/g,
       (match) => `$${match}`
     );
+    console.log(queryString);
     const queryObject = JSON.parse(queryString);
 
     let query = Product.find(queryObject);
@@ -58,6 +63,7 @@ module.exports.getAllProducts = async (req, res) => {
     const { sort } = req.query;
     if (sort) {
       const sortBy = sort.split(",").join(" ");
+      console.log(sortBy);
       query = query.sort(sortBy);
     } else {
       query = query.sort("-createdAt");
@@ -86,8 +92,12 @@ module.exports.getAllProducts = async (req, res) => {
       }
     }
 
-    const products = await query;
-    res.status(200).json(products);
+    const totalCount = await Product.countDocuments(queryObject);
+
+    const products = await query
+      .populate("ratings.postedBy", "firstName lastName picturePath")
+      .populate("burgerType", "title");
+    res.status(200).json({ products, totalCount });
   } catch (error) {
     console.log(error);
     res.status(404).json({ error: error.message });
@@ -98,7 +108,9 @@ module.exports.getSingleProduct = async (req, res) => {
   const { id } = req.params;
   try {
     validateMongoDbId(id, "Product");
-    const product = await Product.findById(id);
+    const product = await Product.findById(id)
+      .populate("ratings.postedBy", "firstName lastName picturePath")
+      .populate("burgerType", "title");
     if (!product) throw new Error("Product not found. Recheck product Id");
     res.status(200).json(product);
   } catch (error) {
@@ -118,12 +130,14 @@ module.exports.updateProduct = async (req, res) => {
     ingredients,
     quantity,
     burgerType,
+    featured,
     dietaryPreferences,
     sold,
     size,
   } = req.body;
 
   try {
+    console.log(req.files);
     validateMongoDbId(id, "Product");
     const product = await Product.findById(id);
     if (!product) throw new Error("Product not found");
@@ -135,6 +149,7 @@ module.exports.updateProduct = async (req, res) => {
       let imagePublicIds = product.images.map(
         (arrayImage) => arrayImage.publicId
       );
+      console.log(imagePublicIds);
       if (!imagePublicIds[0]) {
         imagePublicIds = null;
       }
@@ -151,6 +166,7 @@ module.exports.updateProduct = async (req, res) => {
         ingredients,
         images: imageURIs,
         quantity,
+        featured,
         burgerType,
         dietaryPreferences,
         sold,
@@ -167,17 +183,22 @@ module.exports.updateProduct = async (req, res) => {
   }
 };
 
+//RATE PRODUCT
 module.exports.rateProduct = async (req, res) => {
-  const { id } = req.params;
+  const { productId } = req.params;
   const userId = req.user._id;
   const { star, comment } = req.body;
   try {
-    validateMongoDbId(id, "Product");
-    const product = await Product.findById(id);
+    validateMongoDbId(productId, "Product");
+    const product = await Product.findById(productId);
     if (!product) throw new Error("Product not found!");
+
+    //Check if the user that wants to rate has rated this product before.
     const existingRating = product.ratings.find(
       (rating) => rating.postedBy.toString() === userId.toString()
     );
+
+    //If product has been rated before, then just update his previous rating with the new one else, add his new rating to the ratings array.
     existingRating
       ? ((existingRating.star = star), (existingRating.comment = comment))
       : product.ratings.push({ star, comment, postedBy: userId });

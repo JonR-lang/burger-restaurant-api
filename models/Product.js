@@ -30,14 +30,20 @@ const productSchema = Schema(
         },
       },
     ],
+    featured: {
+      type: Boolean,
+      default: false,
+    },
     images: {
       type: [
         {
-          url: String,
-          publicId: String,
+          url: { type: String, required: [true, "This field is required"] },
+          publicId: {
+            type: String,
+            required: [true, "This field is required"],
+          },
         },
       ],
-      required: [true, "Please put an image for this product"],
     },
     quantity: {
       type: Number,
@@ -67,7 +73,10 @@ const productSchema = Schema(
     },
     ratings: [
       {
-        star: Number,
+        star: {
+          type: Number,
+          max: [5, "This should not be more than 5"],
+        },
         comment: {
           type: String,
           default: "",

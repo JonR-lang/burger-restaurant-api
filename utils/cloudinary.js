@@ -27,7 +27,7 @@ const cloudinaryUpload = async (files, folder) => {
 
       imageData.push({ url: result.secure_url, publicId: result.public_id });
 
-      console.log(result);
+      console.log("Image upload successful: ", result);
     }
 
     return imageData;
@@ -37,12 +37,11 @@ const cloudinaryUpload = async (files, folder) => {
 };
 
 const cloudinaryDestroy = async (publicIds) => {
-  console.log("shit has reached here:", publicIds);
   if (publicIds === null || publicIds.length === 0) return;
   try {
     for (const publicId of publicIds) {
       const result = await cloudinary.uploader.destroy(publicId);
-      console.log(result);
+      console.log("Image Deletion: ", result);
     }
   } catch (error) {
     throw error;

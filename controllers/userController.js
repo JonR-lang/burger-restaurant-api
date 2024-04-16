@@ -8,6 +8,7 @@ const validateMongoDbId = require("../utils/validateMongoDbId");
 //      READ
 //////////////////
 
+//GET ALL USERS
 module.exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -18,6 +19,7 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
+//GET USER'S CART
 module.exports.getUserCart = async (req, res) => {
   const id = req.user._id;
   try {
@@ -32,6 +34,7 @@ module.exports.getUserCart = async (req, res) => {
   }
 };
 
+//GET A SINGLE USER
 module.exports.getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -45,6 +48,7 @@ module.exports.getUser = async (req, res) => {
   }
 };
 
+//GET USER'S WISHLIST
 module.exports.getWishlist = async (req, res) => {
   const { _id } = req.user;
   try {
@@ -59,10 +63,16 @@ module.exports.getWishlist = async (req, res) => {
 //////////////////
 //   POST
 //////////////////
+
+//ADD TO CART
 module.exports.addToCart = async (req, res) => {
-  const { cart } = req.body;
+  const { cartItems } = req.body;
   const userId = req.user._id;
   try {
+    if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
+      throw new Error("Items in the array cannot be empty");
+    }
+
     let items = [];
 
     const existingCart = await Cart.findOne({ orderedBy: userId });
@@ -71,7 +81,7 @@ module.exports.addToCart = async (req, res) => {
       await Cart.deleteOne({ _id: existingCart._id }); // Use deleteOne() to delete the document
     }
 
-    for (let cartItem of cart) {
+    for (let cartItem of cartItems) {
       validateMongoDbId(cartItem.productId, "Product");
 
       let object = {};
@@ -106,8 +116,6 @@ module.exports.addToCart = async (req, res) => {
       orderedBy: userId,
     });
 
-    console.log(newCart);
-
     res.status(201).json(newCart);
   } catch (error) {
     console.log(error);
@@ -115,6 +123,7 @@ module.exports.addToCart = async (req, res) => {
   }
 };
 
+//CREATE COUPON - something only admin's can do!
 module.exports.createCoupon = async (req, res) => {
   const { couponCode, discount, expires } = req.body;
 
@@ -136,6 +145,7 @@ module.exports.createCoupon = async (req, res) => {
   }
 };
 
+//APPLY COUPON
 module.exports.applyCoupon = async (req, res) => {
   const { coupon } = req.body;
   const userId = req.user._id;
@@ -170,6 +180,7 @@ module.exports.applyCoupon = async (req, res) => {
 //    DELETE
 //////////////////
 
+//DELETE COUPON
 module.exports.deleteUser = async (req, res) => {
   const { id } = req.params;
 
@@ -183,6 +194,7 @@ module.exports.deleteUser = async (req, res) => {
   }
 };
 
+//EMPTY CART
 module.exports.emptyCart = async (req, res) => {
   const userId = req.user._id;
   try {
@@ -210,6 +222,7 @@ module.exports.emptyCart = async (req, res) => {
 // - applyCoupon
 //////////////////
 
+//UPDATE USER
 module.exports.updateUser = async (req, res) => {
   const { id } = req.params;
 
@@ -234,6 +247,7 @@ module.exports.updateUser = async (req, res) => {
   }
 };
 
+//BLOCK || UNBLOCK USER
 module.exports.toggleBlockUser = async (req, res) => {
   const { id } = req.params;
 
@@ -250,6 +264,7 @@ module.exports.toggleBlockUser = async (req, res) => {
   }
 };
 
+//ADD || REMOVE FROM WISHLIST
 module.exports.toggleWishlist = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
@@ -270,6 +285,7 @@ module.exports.toggleWishlist = async (req, res) => {
   }
 };
 
+//SAVE USER'S ADDRESS
 module.exports.saveAddress = async (req, res) => {
   const id = req.user._id;
   const { address } = req.body;
@@ -284,7 +300,10 @@ module.exports.saveAddress = async (req, res) => {
       { new: true }
     );
     if (!user) throw new Error("User not found");
-    res.status(201).json(user);
+    res.status(201).json({
+      message: "Address successfully updated!",
+      address: user.address,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });

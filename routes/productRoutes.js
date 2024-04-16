@@ -22,7 +22,7 @@ router.get("/:id", getSingleProduct);
 
 //UPDATE
 router.put("/:id", upload.any(), verifyToken, isAdmin, updateProduct);
-router.put("/ratings/:id", verifyToken, rateProduct);
+router.put("/ratings/:productId", verifyToken, rateProduct);
 
 //DELETE
 router.delete("/:id", verifyToken, isAdmin, deleteProduct);

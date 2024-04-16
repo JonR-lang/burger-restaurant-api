@@ -19,19 +19,29 @@ const orderSchema = new Schema(
         subTotal: { type: Number, required: true },
       },
     ],
+    totalAmount: Number,
     paymentIntent: {},
+    address: {
+      state: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      street: {
+        type: String,
+      },
+      landmark: String,
+    },
+    coupon: String,
+    couponApplied: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
-      enum: [
-        "Not Processed",
-        "Pay on Delivery",
-        "Processing",
-        "Dispatched",
-        "Cancelled",
-        "Delivered",
-        "Returned",
-      ],
-      default: "Not processed",
+      enum: ["pending", "dispatched", "delivered", "cancelled", "returned"],
+      default: "pending",
     },
     orderedBy: {
       type: Schema.Types.ObjectId,

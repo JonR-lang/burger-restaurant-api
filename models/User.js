@@ -49,7 +49,18 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
-    address: String,
+    address: {
+      state: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      street: {
+        type: String,
+      },
+      landmark: String,
+    },
     wishlist: [
       {
         type: Schema.Types.ObjectId,
