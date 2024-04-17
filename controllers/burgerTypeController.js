@@ -18,7 +18,11 @@ module.exports.createBurgerType = async (req, res) => {
 //READ
 module.exports.getAllBurgerTypes = async (req, res) => {
   try {
-    const burgerType = await BurgerType.find();
+    const burgerType = await BurgerType.find().select([
+      "-__v",
+      "-createdAt",
+      "-updatedAt",
+    ]);
     res.status(200).json(burgerType);
   } catch (error) {
     console.log(error);
