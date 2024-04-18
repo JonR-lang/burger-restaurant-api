@@ -7,9 +7,7 @@ const connectDb = require("./utils/dbConnect");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
-const blogRoutes = require("./routes/blogRoutes");
 const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
-const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
 const couponRoutes = require("./routes/couponRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
@@ -35,11 +33,7 @@ app.use("/api/users", userRoutes);
 
 app.use("/api/products", productRoutes);
 
-app.use("/api/blogs", blogRoutes);
-
 app.use("/api/burger-types", burgerTypeRoutes);
-
-app.use("/api/blog-categories", blogCategoryRoutes);
 
 app.use("/api/coupons", couponRoutes);
 
