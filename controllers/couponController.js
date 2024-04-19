@@ -1,12 +1,22 @@
 const Coupon = require("../models/Coupon");
 const validateMongoDbId = require("../utils/validateMongoDbId");
 
-//CREATE
+//CREATE COUPON - something only admin's can do!
 module.exports.createCoupon = async (req, res) => {
-  const { name, expires, discount } = req.body;
+  const { couponCode, discount, expires } = req.body;
+
   try {
-    const coupon = await Coupon.create({ name, expires, discount });
-    res.status(201).json(coupon);
+    // Check to see if the coupon code already exists in database
+    const checkForExistingCoupon = await Coupon.findOne({ name: couponCode });
+    if (checkForExistingCoupon) throw new Error("Coupon already Exists");
+    const newCoupon = await Coupon.create({
+      name: couponCode,
+      discount,
+      expires,
+    });
+    res
+      .status(201)
+      .json({ message: "Coupon sucessfully Created!", coupon: newCoupon });
   } catch (error) {
     console.log(error);
     res.status(401).json({ error: error.message });
@@ -60,7 +70,7 @@ module.exports.updateCoupon = async (req, res) => {
   }
 };
 
-//DELETE BLOG
+//DELETE
 module.exports.deleteCoupon = async (req, res) => {
   const { id } = req.params;
   try {

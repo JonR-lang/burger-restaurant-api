@@ -196,10 +196,25 @@ const updateOrder = async (req, res) => {
   }
 };
 
+//DELETE
+const deleteOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    validateMongoDbId(id, "Order");
+    const order = await Order.findByIdAndDelete(id);
+    if (!order) throw new Error("Order not found");
+    res.status(200).json({ message: "Order successfully deleted" });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createOrder,
   getAllOrders,
   getOrder,
   verifyPayment,
   updateOrder,
+  deleteOrder,
 };

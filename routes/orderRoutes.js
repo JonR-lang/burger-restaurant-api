@@ -9,6 +9,7 @@ const {
   getOrder,
   verifyPayment,
   updateOrder,
+  deleteOrder,
 } = require("../controllers/orderController");
 
 //CREATE
@@ -22,4 +23,8 @@ router.get("/:id", verifyToken, isAdmin, getOrder);
 
 //UPDATE
 router.put("/:id", verifyToken, isAdmin, updateOrder);
+
+//DELETE
+router.delete("/:id", verifyToken, isAdmin, deleteOrder);
+
 module.exports = router;
