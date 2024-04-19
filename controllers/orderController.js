@@ -184,7 +184,7 @@ const updateOrder = async (req, res) => {
       {
         status,
       },
-      { new: true }
+      { new: true, runValidators: true }
     );
 
     if (!order) throw new Error("Order not found!");
