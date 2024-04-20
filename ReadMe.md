@@ -4,6 +4,8 @@
 
 This is my entry for a simple API that allows users to create, read, update, and delete products, burger types, coupons, and orders.
 
+### Note: Both the links for the complete postman documentation and the ER diagram are at the bottom of this file. Scroll to the bottom to spot the links. 
+
 Please note that because I am using a free instance of render to host my server, it takes sometime to spin up the server after being idle for a while.
 
 # Base URL
