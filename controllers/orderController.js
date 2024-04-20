@@ -1,6 +1,7 @@
 const paystack = require("paystack")(process.env.PAYSTACK_API_SECRET_KEY_TEST);
 const { v4: uuidv4 } = require("uuid");
 const Order = require("../models/Order");
+const Coupon = require("../models/Coupon");
 const User = require("../models/User");
 const Product = require("../models/Product");
 const applyCoupon = require("../utils/applyCoupon");
@@ -206,7 +207,7 @@ const deleteOrder = async (req, res) => {
     res.status(200).json({ message: "Order successfully deleted" });
   } catch (error) {
     console.log(error);
-    res.status(400).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 };
 

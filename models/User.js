@@ -46,8 +46,8 @@ const userSchema = new Schema(
       default: false,
     },
     cart: {
-      type: Array,
-      default: [],
+      type: Schema.Types.ObjectId,
+      ref: "Cart",
     },
     address: {
       state: {
