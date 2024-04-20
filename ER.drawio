@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-20T10:14:08.101Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="MFNB94kalPLPByo8JNfr" version="24.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-20T10:29:11.987Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="03ygPHAvqrAnL0h-zVcQ" version="24.2.7" type="github">
   <diagram name="Page-1" id="Ou0Gcl6l-S-8oS8wwKDa">
     <mxGraphModel dx="1742" dy="1627" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -200,7 +200,7 @@
             <mxRectangle width="30" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="14zHS0JnAgoN_JKjx-6R-190" value="couponID" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-188" vertex="1">
+        <mxCell id="14zHS0JnAgoN_JKjx-6R-190" value="couponName" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-188" vertex="1">
           <mxGeometry x="30" width="150" height="30" as="geometry">
             <mxRectangle width="150" height="30" as="alternateBounds" />
           </mxGeometry>
@@ -404,7 +404,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-43" value="Coupon" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#FF8000;rounded=0;sketch=1;curveFitting=1;jiggle=2;shadow=0;" parent="1" vertex="1">
-          <mxGeometry x="380" y="-200" width="180" height="150" as="geometry" />
+          <mxGeometry x="380" y="-200" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-44" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="14zHS0JnAgoN_JKjx-6R-43" vertex="1">
           <mxGeometry y="30" width="180" height="30" as="geometry" />
@@ -414,26 +414,13 @@
             <mxRectangle width="30" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="14zHS0JnAgoN_JKjx-6R-46" value="couponID" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-44" vertex="1">
-          <mxGeometry x="30" width="150" height="30" as="geometry">
-            <mxRectangle width="150" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="14zHS0JnAgoN_JKjx-6R-47" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="14zHS0JnAgoN_JKjx-6R-43" vertex="1">
-          <mxGeometry y="60" width="180" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="14zHS0JnAgoN_JKjx-6R-48" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-47" vertex="1">
-          <mxGeometry width="30" height="30" as="geometry">
-            <mxRectangle width="30" height="30" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="14zHS0JnAgoN_JKjx-6R-49" value="name" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-47" vertex="1">
+        <mxCell id="14zHS0JnAgoN_JKjx-6R-46" value="couponName" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=5;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-44" vertex="1">
           <mxGeometry x="30" width="150" height="30" as="geometry">
             <mxRectangle width="150" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-50" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="14zHS0JnAgoN_JKjx-6R-43" vertex="1">
-          <mxGeometry y="90" width="180" height="30" as="geometry" />
+          <mxGeometry y="60" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-51" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-50" vertex="1">
           <mxGeometry width="30" height="30" as="geometry">
@@ -446,7 +433,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-53" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" parent="14zHS0JnAgoN_JKjx-6R-43" vertex="1">
-          <mxGeometry y="120" width="180" height="30" as="geometry" />
+          <mxGeometry y="90" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="14zHS0JnAgoN_JKjx-6R-54" value="" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;" parent="14zHS0JnAgoN_JKjx-6R-53" vertex="1">
           <mxGeometry width="30" height="30" as="geometry">
