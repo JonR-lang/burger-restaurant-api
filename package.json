@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index"
+    "server": "nodemon index",
+    "dev": "export NODE_ENV='development' && npm run server",
+    "start": "export NODE_ENV='production' && npm run server"
   },
   "keywords": [],
   "author": "",

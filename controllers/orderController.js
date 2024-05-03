@@ -1,6 +1,7 @@
 const paystack = require("paystack")(process.env.PAYSTACK_API_SECRET_KEY_TEST);
 const { v4: uuidv4 } = require("uuid");
 const Order = require("../models/Order");
+const Coupon = require("../models/Coupon");
 const User = require("../models/User");
 const Product = require("../models/Product");
 const applyCoupon = require("../utils/applyCoupon");
@@ -56,7 +57,7 @@ const createOrder = async (req, res) => {
       totalAmount = totalAmount - discount;
     }
 
-    //Now if the above conditions are met, initialized the transaction using paystack.
+    //Now if the above conditions are met, initialize the transaction using paystack.
 
     const paymentResponse = await paystack.transaction.initialize({
       email: user.email,
@@ -184,7 +185,7 @@ const updateOrder = async (req, res) => {
       {
         status,
       },
-      { new: true }
+      { new: true, runValidators: true }
     );
 
     if (!order) throw new Error("Order not found!");
@@ -196,10 +197,25 @@ const updateOrder = async (req, res) => {
   }
 };
 
+//DELETE
+const deleteOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    validateMongoDbId(id, "Order");
+    const order = await Order.findByIdAndDelete(id);
+    if (!order) throw new Error("Order not found");
+    res.status(200).json({ message: "Order successfully deleted" });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createOrder,
   getAllOrders,
   getOrder,
   verifyPayment,
   updateOrder,
+  deleteOrder,
 };

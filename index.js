@@ -45,7 +45,11 @@ app.use("/api/coupons", couponRoutes);
 
 app.use("/api/orders", orderRoutes);
 
-const PORT = process.env.PORT || 8080;
+const developmentPort = 5000;
+const productionPort = process.env.PORT || 8080;
+
+const PORT =
+  process.env.NODE_ENV === "production" ? productionPort : developmentPort;
 
 connectDb()
   .then(() => {

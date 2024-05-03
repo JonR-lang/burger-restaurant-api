@@ -22,7 +22,7 @@ const {
 // ===========================
 //         READ
 // ===========================
-router.get("/", verifyToken, getAllUsers);
+router.get("/", verifyToken, isAdmin, getAllUsers);
 router.get("/wishlist", verifyToken, getWishlist); //Point to note, static routes should always come before dynamic routes!
 router.get("/cart", verifyToken, getUserCart);
 router.get("/:id", verifyToken, getUser);
@@ -30,7 +30,6 @@ router.get("/:id", verifyToken, getUser);
 // ===========================
 //         POST
 // ===========================
-router.post("/create-coupon", verifyToken, isAdmin, createCoupon);
 router.post("/cart", verifyToken, addToCart);
 router.post("/cart/apply-coupon", verifyToken, applyCoupon);
 

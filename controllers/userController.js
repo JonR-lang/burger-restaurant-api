@@ -19,6 +19,20 @@ module.exports.getAllUsers = async (req, res) => {
   }
 };
 
+//GET A SINGLE USER
+module.exports.getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    validateMongoDbId(id, "User");
+    const user = await User.findById(id);
+    if (!user) throw new Error("User not found");
+    console.log(user.fullName); //This is possible as a result of the virtual method I defined in the userSchema.
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
 //GET USER'S CART
 module.exports.getUserCart = async (req, res) => {
   const id = req.user._id;
@@ -31,20 +45,6 @@ module.exports.getUserCart = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(200).json({ error: error.message });
-  }
-};
-
-//GET A SINGLE USER
-module.exports.getUser = async (req, res) => {
-  const { id } = req.params;
-  try {
-    validateMongoDbId(id, "User");
-    const user = await User.findById(id);
-    if (!user) throw new Error("User not found");
-    console.log(user.fullName); //This is possible as a result of the virtual method I defined in the userSchema.
-    res.status(200).json(user);
-  } catch (err) {
-    res.status(404).json({ error: err.message });
   }
 };
 
@@ -123,28 +123,6 @@ module.exports.addToCart = async (req, res) => {
   }
 };
 
-//CREATE COUPON - something only admin's can do!
-module.exports.createCoupon = async (req, res) => {
-  const { couponCode, discount, expires } = req.body;
-
-  try {
-    // Check to see if the coupon code already exists in database
-    const checkForExistingCoupon = await Coupon.findOne({ name: couponCode });
-    if (checkForExistingCoupon) throw new Error("Coupon already Exists");
-    const newCoupon = await Coupon.create({
-      name: couponCode,
-      discount,
-      expires,
-    });
-    res
-      .status(201)
-      .json({ message: "Coupon sucessfully Created!", coupon: newCoupon });
-  } catch (error) {
-    console.log(error);
-    res.status(401).json({ error: error.message });
-  }
-};
-
 //APPLY COUPON
 module.exports.applyCoupon = async (req, res) => {
   const { coupon } = req.body;
@@ -180,7 +158,7 @@ module.exports.applyCoupon = async (req, res) => {
 //    DELETE
 //////////////////
 
-//DELETE COUPON
+//DELETE
 module.exports.deleteUser = async (req, res) => {
   const { id } = req.params;
 
