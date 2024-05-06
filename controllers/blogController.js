@@ -39,7 +39,9 @@ module.exports.getBlog = async (req, res) => {
   const { id } = req.params;
   try {
     validateMongoDbId(id, "Blog");
-    let blog = await Blog.findById(id);
+    let blog = await Blog.findById(id)
+      .populate("author", "firstName lastName picturePath")
+      .populate("category");
     if (!blog) throw new Error("Blog not found");
     blog.views++;
     blog = await blog.save();
