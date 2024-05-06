@@ -24,7 +24,7 @@ module.exports.createBlog = async (req, res) => {
 //GET ALL BLOGS
 module.exports.getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find({})
+    const blogs = await Blog.find(req.query)
       .populate("author", "firstName lastName picturePath")
       .populate("category", "title");
     res.status(200).json(blogs);
