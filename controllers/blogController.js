@@ -26,7 +26,7 @@ module.exports.getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find({})
       .populate("author", "firstName lastName picturePath")
-      .populate("category");
+      .populate("category", "title");
     res.status(200).json(blogs);
   } catch (error) {
     console.log(error);
@@ -41,7 +41,7 @@ module.exports.getBlog = async (req, res) => {
     validateMongoDbId(id, "Blog");
     let blog = await Blog.findById(id)
       .populate("author", "firstName lastName picturePath")
-      .populate("category");
+      .populate("category", "title");
     if (!blog) throw new Error("Blog not found");
     blog.views++;
     blog = await blog.save();
