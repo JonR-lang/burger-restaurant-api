@@ -1,8 +1,8 @@
-# WAJUSOFT SOFTWARE CHALLENGE
+# Burger Restaurant API
 
 ## Description
 
-This is my entry for a simple API that allows users to create, read, update, and delete products, burger types, coupons, and orders.
+This is a robust API that allows users to create, read, update, and delete products, burger types, coupons, and orders.
 
 ### Note: Both the links for the complete postman documentation and the ER diagram are at the bottom of this file. Scroll to the bottom to spot the links. 
 
