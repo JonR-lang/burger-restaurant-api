@@ -96,7 +96,7 @@ const verifyPayment = async (req, res) => {
     const {
       data: { reference },
     } = req.body; //The reference is destructured from the body of the request.
-
+    console.log(reference && reference)
     const verificationResponse = await paystack.transaction.verify(reference);
 
     if (verificationResponse.data.status !== "success")
@@ -137,6 +137,7 @@ const verifyPayment = async (req, res) => {
 
     //Send the notification to the client via websocket
     const clientSocket = clients.get(orderedBy);
+    console.log(clientSocket)
     if (clientSocket) {
       clientSocket.emit("paymentVerified", {
         message: "Your order has been created successfully!",
