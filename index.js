@@ -1,4 +1,6 @@
 const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
 const cors = require("cors");
 const { default: helmet } = require("helmet");
 const morgan = require("morgan");
@@ -12,10 +14,17 @@ const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
 const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
 const couponRoutes = require("./routes/couponRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const { clients } = require("./utils/clients");
 
 require("dotenv").config();
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 //MIDDLEWARE
 app.use(cors("*"));
@@ -53,10 +62,34 @@ const PORT =
 
 connectDb()
   .then(() => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log(`Server is running at ${PORT}`);
     });
   })
   .catch((error) => {
     console.error(`Error connecting to MongoDb: ${error.message}`);
   });
+
+//WebSocket Connection handler
+
+//First keep track of the connected clients by creating a map object where you can store the userIds, once they register
+io.on("connection", (socket) => {
+  console.log("New client connected", socket.id);
+
+  socket.on("register", (userId) => {
+    clients.set(userId, socket);
+    console.log(
+      `Client with userId: ${userId} registered with socketId: ${socket.id}`
+    );
+  });
+
+  socket.on("disconnect", () => {
+    for (let [userId, clientSocket] of clients.entries()) {
+      if (clientSocket.id === socket.id) {
+        clients.delete(userId);
+        console.log(`User ${userId} disconnected`);
+      }
+      break;
+    }
+  });
+});

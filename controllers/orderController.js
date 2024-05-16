@@ -1,7 +1,7 @@
 const paystack = require("paystack")(process.env.PAYSTACK_API_SECRET_KEY_TEST);
 const { v4: uuidv4 } = require("uuid");
 const Order = require("../models/Order");
-const Coupon = require("../models/Coupon");
+const { clients } = require("../utils/clients");
 const User = require("../models/User");
 const Product = require("../models/Product");
 const applyCoupon = require("../utils/applyCoupon");
@@ -63,6 +63,7 @@ const createOrder = async (req, res) => {
       email: user.email,
       amount: parseInt(totalAmount) * 100, //When using paystack, amount must be an integar and it is multiplied by 100, because it expects the amount in kobo.
       reference: uuidv4(), //If reference is not provided, an automatic reference is provided. It is with this reference that you would use to verify payment.
+      callback_url: process.env.CLIENT_URL,
       metadata: {
         items: updatedItems,
         paymentIntent,
@@ -121,7 +122,7 @@ const verifyPayment = async (req, res) => {
       paymentIntent,
     });
 
-    //Update the quantity of items left in the database, and also update the amount of the product sold too.
+    // //Update the quantity of items left in the database, and also update the amount of the product sold too.
     const updatedProducts = items.map((item) => {
       return {
         updateOne: {
@@ -131,8 +132,17 @@ const verifyPayment = async (req, res) => {
       };
     });
 
-    //BulkWrite is used so that you would not have to take multiple to and fro trips to the database.
+    // //BulkWrite is used so that you would not have to take multiple to and fro trips to the database.
     await Product.bulkWrite(updatedProducts, {});
+
+    //Send the notification to the client via websocket
+    const clientSocket = clients.get(orderedBy);
+    if (clientSocket) {
+      clientSocket.emit("paymentVerified", {
+        message: "Your order has been created successfully!",
+        orderId: order._id,
+      });
+    }
 
     console.log("Operation successful!");
     res.sendStatus(200);

@@ -52,7 +52,10 @@ module.exports.getUserCart = async (req, res) => {
 module.exports.getWishlist = async (req, res) => {
   const { _id } = req.user;
   try {
-    const user = await User.findById(_id).populate("wishlist");
+    const user = await User.findById(_id).populate(
+      "wishlist",
+      "_id name slug price description images totalRatings"
+    );
     res.status(200).json(user.wishlist);
   } catch (error) {
     console.log(error);

@@ -15,7 +15,6 @@ const {
   addToCart,
   getUserCart,
   emptyCart,
-  createCoupon,
   applyCoupon,
 } = require("../controllers/userController");
 

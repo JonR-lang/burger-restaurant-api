@@ -27,6 +27,7 @@
     "nodemailer": "^6.9.9",
     "paystack": "^2.0.1",
     "sharp": "^0.33.2",
+    "socket.io": "^4.7.5",
     "uuid": "^9.0.1",
     "validator": "^13.11.0"
   }
