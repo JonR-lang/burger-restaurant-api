@@ -68,7 +68,10 @@ module.exports.getWishlist = async (req, res) => {
 module.exports.getOrders = async (req, res) => {
   const { _id } = req.user;
   try {
-    const orders = await Order.find({ orderedBy: _id });
+    const orders = await Order.find({ orderedBy: _id }).populate(
+      "items.product",
+      "name"
+    );
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);
