@@ -14,7 +14,7 @@ const orderSchema = new Schema(
         },
         size: {
           type: String,
-          enum: ["small", "large", "medium"],
+          enum: ["single", "double", "triple"],
         },
         subTotal: { type: Number, required: true },
       },
