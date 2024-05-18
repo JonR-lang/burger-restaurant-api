@@ -8,6 +8,7 @@ const {
   getAllUsers,
   deleteUser,
   updateUser,
+  getOrders,
   toggleBlockUser,
   toggleWishlist,
   getWishlist,
@@ -24,6 +25,7 @@ const {
 router.get("/", verifyToken, isAdmin, getAllUsers);
 router.get("/wishlist", verifyToken, getWishlist); //Point to note, static routes should always come before dynamic routes!
 router.get("/cart", verifyToken, getUserCart);
+router.get("/orders", verifyToken, getOrders);
 router.get("/:id", verifyToken, getUser);
 
 // ===========================

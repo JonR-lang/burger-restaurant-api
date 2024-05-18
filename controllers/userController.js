@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Product = require("../models/Product");
+const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const Coupon = require("../models/Coupon");
 const validateMongoDbId = require("../utils/validateMongoDbId");
@@ -57,6 +58,18 @@ module.exports.getWishlist = async (req, res) => {
       "_id name slug price description images totalRatings"
     );
     res.status(200).json(user.wishlist);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+};
+
+//GET USER'S ORDERS
+module.exports.getOrders = async (req, res) => {
+  const { _id } = req.user;
+  try {
+    const orders = await Order.find({ orderedBy: _id });
+    res.status(200).json(orders);
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error.message });
