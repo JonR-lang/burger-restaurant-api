@@ -24,7 +24,7 @@ router.post("/admin-login", adminLogin);
 router.get("/refresh-token", handleRefreshToken);
 
 //LOGOUT
-router.get("/logout", logOut);
+router.patch("/logout", verifyToken, logOut);
 
 //FORGOT PASSWORD
 router.post("/forgot-password-token", forgotPasswordToken);
