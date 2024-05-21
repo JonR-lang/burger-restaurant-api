@@ -131,6 +131,7 @@ module.exports.handleRefreshToken = async (req, res) => {
 //LOGOUT
 
 module.exports.logOut = async (req, res) => {
+  console.log(req.cookies);
   const { refreshToken } = req.cookies;
   try {
     if (!refreshToken)
