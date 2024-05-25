@@ -18,7 +18,6 @@ module.exports.createProduct = async (req, res) => {
 
   try {
     const imageURIs = await cloudinaryUpload(req.files, "Products");
-    console.log(imageURIs);
     const product = await Product.create({
       name,
       slug: name,
@@ -40,7 +39,6 @@ module.exports.createProduct = async (req, res) => {
 
 //READ
 module.exports.getAllProducts = async (req, res) => {
-  console.log(req.query);
   try {
     //I want you to note that not attaching await to the find method on the products, returns a query object in which you can use mongoDB native query methods on. Attaching await just means that you want to return the result.
     //Some of these mongodb methods include sort, limit, skip.
@@ -54,7 +52,6 @@ module.exports.getAllProducts = async (req, res) => {
       /\b(gte|gt|lte|lt|in)\b/g,
       (match) => `$${match}`
     );
-    console.log(queryString);
     const queryObject = JSON.parse(queryString);
 
     let query = Product.find(queryObject);
@@ -63,7 +60,6 @@ module.exports.getAllProducts = async (req, res) => {
     const { sort } = req.query;
     if (sort) {
       const sortBy = sort.split(",").join(" ");
-      console.log(sortBy);
       query = query.sort(sortBy);
     } else {
       query = query.sort("-createdAt");

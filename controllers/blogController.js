@@ -102,7 +102,9 @@ module.exports.toggleLike = async (req, res) => {
     let blog = await Blog.findById(id);
     if (blog.likes.includes(userId)) {
       //remove userId from array of likes
-      blog.likes = blog.likes.filter((item) => item.toString() !== userId);
+      blog.likes = blog.likes.filter(
+        (item) => item.toString() !== userId.toString()
+      );
     } else {
       //add userId to the array of likes
       blog.likes.push(userId);

@@ -145,28 +145,14 @@ module.exports.addToCart = async (req, res) => {
 //APPLY COUPON
 module.exports.applyCoupon = async (req, res) => {
   const { coupon } = req.body;
-  const userId = req.user._id;
   try {
     const validCoupon = await Coupon.findOne({ name: coupon });
     if (!validCoupon) throw new Error("Invalid Coupon!");
     if (Date.now() > validCoupon.expires.getTime())
       throw new Error("Coupon expired!");
-    const userCart = await Cart.findOne({ orderedBy: userId });
-    if (!userCart) throw new Error("Cannot apply coupon on inexistent Cart");
-    const { cartTotal } = userCart;
-    const discountAmount =
-      (parseFloat(cartTotal) * parseInt(validCoupon.discount)) / 100;
-    const totalAfterDiscount = (cartTotal - discountAmount).toFixed(2);
-    const updatedCart = await Cart.findByIdAndUpdate(
-      userCart.id,
-      {
-        totalAfterDiscount,
-      },
-      { new: true }
-    );
     res
       .status(201)
-      .json({ message: "Valid Coupon, Coupon Applied!", updatedCart });
+      .json({ message: "Valid Coupon, Coupon Applied!", coupon: validCoupon });
   } catch (error) {
     console.log(error);
     res.status(401).json({ error: error.message });

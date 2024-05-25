@@ -19,7 +19,7 @@ router.post("/verify-payment", verifyPayment);
 
 //READ
 router.get("/", verifyToken, isAdmin, getAllOrders);
-router.get("/:id", verifyToken, isAdmin, getOrder);
+router.get("/:id", verifyToken, getOrder);
 
 //UPDATE
 router.put("/:id", verifyToken, isAdmin, updateOrder);
