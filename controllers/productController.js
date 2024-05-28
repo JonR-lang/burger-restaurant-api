@@ -45,7 +45,7 @@ module.exports.getAllProducts = async (req, res) => {
 
     //FILTERING
     const queryObj = { ...req.query };
-    const excludedFields = ["page", "sort", "limit", "fields"];
+    const excludedFields = ["page", "sort", "limit", "fields", "search"];
     excludedFields.forEach((field) => delete queryObj[field]);
     let queryString = JSON.stringify(queryObj);
     queryString = queryString.replace(
@@ -53,6 +53,19 @@ module.exports.getAllProducts = async (req, res) => {
       (match) => `$${match}`
     );
     const queryObject = JSON.parse(queryString);
+
+    // FUZZY SEARCH
+    const { search } = req.query;
+    if (search) {
+      const searchRegex = new RegExp(search, "i"); // 'i' for case-insensitive
+
+      queryObject.$or = [
+        { name: { $regex: searchRegex } },
+        { category: { $regex: searchRegex } },
+        { dietaryPreferences: { $regex: searchRegex } },
+        { "ingredients.name": { $regex: searchRegex } },
+      ];
+    }
 
     let query = Product.find(queryObject);
 
@@ -90,9 +103,13 @@ module.exports.getAllProducts = async (req, res) => {
 
     const totalCount = await Product.countDocuments(queryObject);
 
-    const products = await query
-      .populate("ratings.postedBy", "firstName lastName picturePath")
-      .populate("burgerType", "title");
+    if (!(fields && search)) {
+      query = query
+        .populate("ratings.postedBy", "firstName lastName picturePath")
+        .populate("burgerType", "title");
+    }
+
+    const products = await query;
     res.status(200).json({ products, totalCount });
   } catch (error) {
     console.log(error);

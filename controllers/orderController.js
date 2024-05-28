@@ -13,6 +13,7 @@ const createOrder = async (req, res) => {
   try {
     const { items, paymentIntent, coupon, address } = req.body;
     const userId = req.user._id;
+    console.log(req.body);
 
     // Validate input data
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -63,7 +64,7 @@ const createOrder = async (req, res) => {
       email: user.email,
       amount: parseInt(totalAmount) * 100, //When using paystack, amount must be an integar and it is multiplied by 100, because it expects the amount in kobo.
       reference: uuidv4(), //If reference is not provided, an automatic reference is provided. It is with this reference that you would use to verify payment.
-      callback_url: process.env.CLIENT_CALLBACK_URL,
+      // callback_url: `${process.env.CLIENT_URL}/cart`,
       metadata: {
         items: updatedItems,
         paymentIntent,
@@ -136,7 +137,7 @@ const verifyPayment = async (req, res) => {
 
     //Send the notification to the client via websocket
     const clientSocket = clients.get(orderedBy);
-    
+
     if (clientSocket) {
       clientSocket.emit("paymentVerified", {
         message: "Your order has been created successfully!",

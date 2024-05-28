@@ -163,18 +163,19 @@ module.exports.forgotPasswordToken = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) throw new Error("User with email not found!");
     const token = await user.createPasswordResetToken();
-    const updatedUser = await user.save(); //This has to be done so as to save the new modifications to the database. The above method, generates a resetToken, hashes it, and saves it to the database, along with its expiry date.It also returns the token created.
-    const resetUrl = `Please follow this link to reset your password. This link is valid for 10 minutes. <a href='http://localhost:3001/api/auth/reset-password/${token}'>Click me</a>`;
+    await user.save(); //This has to be done so as to save the new modifications to the database. The above method, generates a resetToken, hashes it, and saves it to the database, along with its expiry date.It also returns the token created.
+    const resetUrl = `Please follow this link to reset your password. This link is valid for 10 minutes. <a href='${process.env.CLIENT_URL}/reset-password/${token}'>Click me</a>`;
     const data = {
       to: email,
-      text: "Hey User",
-      subject: "Forgot Password Link",
+      text: "Hey Foodie!",
+      subject: "Reset Password",
       html: resetUrl,
     };
     sendEmail(data);
-    res.status(201).json({ token, updatedUser });
+    console.log(token);
+    res.status(201).json({ token });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(401).json({ error: error.message });
   }
 };
@@ -184,6 +185,8 @@ module.exports.forgotPasswordToken = async (req, res) => {
 module.exports.resetPassword = async (req, res) => {
   const { token } = req.params;
   const { password } = req.body;
+
+  console.log({ token, password });
   const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
   try {
     let user = await User.findOne({

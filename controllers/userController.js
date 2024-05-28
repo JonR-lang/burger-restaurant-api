@@ -27,7 +27,7 @@ module.exports.getUser = async (req, res) => {
     validateMongoDbId(id, "User");
     const user = await User.findById(id);
     if (!user) throw new Error("User not found");
-    console.log(user.fullName); //This is possible as a result of the virtual method I defined in the userSchema.
+    // console.log(user.fullName); //This is possible as a result of the virtual method I defined in the userSchema.
     res.status(200).json(user);
   } catch (err) {
     res.status(404).json({ error: err.message });
@@ -68,10 +68,9 @@ module.exports.getWishlist = async (req, res) => {
 module.exports.getOrders = async (req, res) => {
   const { _id } = req.user;
   try {
-    const orders = await Order.find({ orderedBy: _id }).populate(
-      "items.product",
-      "name"
-    );
+    const orders = await Order.find({ orderedBy: _id })
+      .populate("items.product", "name")
+      .sort("-createdAt");
     res.status(200).json(orders);
   } catch (error) {
     console.log(error);

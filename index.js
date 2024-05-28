@@ -22,7 +22,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.DOMAIN,
+    origin: process.env.CLIENT_URL,
     credentials: true,
   },
 });
@@ -30,7 +30,7 @@ const io = new Server(server, {
 //MIDDLEWARE
 app.use(
   cors({
-    origin: process.env.DOMAIN,
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
