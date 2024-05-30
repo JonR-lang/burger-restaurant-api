@@ -14,6 +14,7 @@ const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
 const blogCategoryRoutes = require("./routes/blogCategoryRoutes");
 const couponRoutes = require("./routes/couponRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const newsletterRoutes = require("./routes/newsletterRoutes");
 const { clients } = require("./utils/clients");
 
 require("dotenv").config();
@@ -59,6 +60,8 @@ app.use("/api/blog-categories", blogCategoryRoutes);
 app.use("/api/coupons", couponRoutes);
 
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/newsletter", newsletterRoutes);
 
 const developmentPort = 5000;
 const productionPort = process.env.PORT || 8080;

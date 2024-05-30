@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const blogCategorySchema = Schema(
+const blogCategorySchema = new Schema(
   {
     title: {
       type: String,

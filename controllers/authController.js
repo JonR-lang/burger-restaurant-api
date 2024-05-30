@@ -164,7 +164,7 @@ module.exports.forgotPasswordToken = async (req, res) => {
     if (!user) throw new Error("User with email not found!");
     const token = await user.createPasswordResetToken();
     await user.save(); //This has to be done so as to save the new modifications to the database. The above method, generates a resetToken, hashes it, and saves it to the database, along with its expiry date.It also returns the token created.
-    const resetUrl = `Please follow this link to reset your password. This link is valid for 10 minutes. <a href='${process.env.CLIENT_URL}/reset-password/${token}'>Click me</a>`;
+    const resetUrl = `Please follow this link to reset your password. This link is valid for 10 minutes. <a href='${process.env.CLIENT_URL}/reset-password/${token}'>Click here.</a>`;
     const data = {
       to: email,
       text: "Hey Foodie!",
@@ -172,7 +172,6 @@ module.exports.forgotPasswordToken = async (req, res) => {
       html: resetUrl,
     };
     sendEmail(data);
-    console.log(token);
     res.status(201).json({ token });
   } catch (error) {
     console.log(error.message);
