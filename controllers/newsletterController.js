@@ -47,7 +47,7 @@ module.exports.getSubscribers = async (req, res) => {
 module.exports.sendNewsletter = async (req, res) => {
   try {
     const { mail } = req.body;
-    const subscribers = await NewsLetter.find();
+    const subscribers = await Newsletter.find();
 
     if (subscribers.length === 0) throw new Error("No subscribers found");
 
