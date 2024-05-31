@@ -30,6 +30,7 @@ module.exports.getUser = async (req, res) => {
     // console.log(user.fullName); //This is possible as a result of the virtual method I defined in the userSchema.
     res.status(200).json(user);
   } catch (err) {
+    console.log(err);
     res.status(404).json({ error: err.message });
   }
 };
@@ -137,7 +138,7 @@ module.exports.addToCart = async (req, res) => {
     res.status(201).json(newCart);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -154,7 +155,7 @@ module.exports.applyCoupon = async (req, res) => {
       .json({ message: "Valid Coupon, Coupon Applied!", coupon: validCoupon });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -191,7 +192,7 @@ module.exports.emptyCart = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

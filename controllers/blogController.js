@@ -17,7 +17,7 @@ module.exports.createBlog = async (req, res) => {
     res.status(201).json(blog);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -88,7 +88,7 @@ module.exports.updateBlog = async (req, res) => {
     res.status(201).json(updatedBlog);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -113,7 +113,7 @@ module.exports.toggleLike = async (req, res) => {
     res.status(201).json(updatedBlog);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

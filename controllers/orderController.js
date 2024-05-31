@@ -204,7 +204,7 @@ const updateOrder = async (req, res) => {
     res.status(201).json({ message: "Order status changed!", order });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

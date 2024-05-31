@@ -19,7 +19,7 @@ module.exports.createCoupon = async (req, res) => {
       .json({ message: "Coupon sucessfully Created!", coupon: newCoupon });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -66,7 +66,7 @@ module.exports.updateCoupon = async (req, res) => {
     res.status(200).json(coupon);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 };
 

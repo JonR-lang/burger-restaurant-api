@@ -33,7 +33,7 @@ module.exports.createProduct = async (req, res) => {
     });
     res.status(201).json(product);
   } catch (error) {
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -226,7 +226,7 @@ module.exports.rateProduct = async (req, res) => {
     res.status(201).json(updatedProduct);
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

@@ -24,7 +24,7 @@ module.exports.createUser = async (req, res) => {
     res.status(201).json({ userId: user._id });
   } catch (err) {
     const errors = handleError(err);
-    res.status(401).json({ errors });
+    res.status(400).json({ errors });
   }
 };
 
@@ -124,7 +124,7 @@ module.exports.handleRefreshToken = async (req, res) => {
     res.status(200).json({ accessToken: generateAccessToken(decodedToken.id) });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -151,7 +151,7 @@ module.exports.logOut = async (req, res) => {
       .json({ message: "Log out successful" });
   } catch (error) {
     console.log(error);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -175,7 +175,7 @@ module.exports.forgotPasswordToken = async (req, res) => {
     res.status(201).json({ token });
   } catch (error) {
     console.log(error.message);
-    res.status(401).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
