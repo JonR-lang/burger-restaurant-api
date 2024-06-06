@@ -24,7 +24,28 @@ module.exports.createBlog = async (req, res) => {
 //GET ALL BLOGS
 module.exports.getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find(req.query)
+    const queryObj = { ...req.query };
+    const excludedFields = ["sort", "limit"];
+    excludedFields.forEach((field) => delete queryObj[field]);
+
+    let query = Blog.find(queryObj);
+
+    //SORTING
+    const { sort } = req.query;
+    if (sort) {
+      const sortBy = sort.split(",").join(" ");
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort("-createdAt");
+    }
+
+    //LIMIT
+    const { limit } = req.query;
+    if (limit) {
+      query.limit(limit);
+    }
+
+    const blogs = await query
       .populate("author", "firstName lastName picturePath")
       .populate("category", "title");
     res.status(200).json(blogs);
