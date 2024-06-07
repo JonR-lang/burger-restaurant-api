@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (data) => {
   console.log(data);
-  const { email, subject, body } = data;
+  const { fullName, email, subject, message } = data;
 
   if (!email || !subject || !body)
     throw new Error("All fileds should be provided!");
@@ -20,20 +20,21 @@ const sendEmail = async (data) => {
   await transporter.sendMail({
     from: email,
     to: "iroelejohnny@gmail.com",
-    subject: `Contact form submission: ${subject}`,
-    text: `You have received a new message from ${email}:\n\n${body}`,
+    subject: `Contact form submission from ${fullName}: ${subject}`,
+    text: `You have received a new message from ${email}:\n\n${message}`,
   });
 };
 
 module.exports.contact = async (req, res) => {
-  const { email, subject, body } = req.body;
+  const { fullName, email, subject, message } = req.body;
   try {
-    if (!email || !subject || !body)
+    if (!fullName || !email || !subject || !message)
       throw new Error("All fileds should be provided!");
     const data = {
+      fullName,
       email,
       subject,
-      body,
+      message,
     };
     sendEmail(data);
     res.status(201).json({ message: "Email received successfully!" });
