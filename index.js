@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const connectDb = require("./utils/dbConnect");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const contactRoutes = require('./routes/contactRoutes')
 const productRoutes = require("./routes/productRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const burgerTypeRoutes = require("./routes/burgerTypeRoutes");
@@ -58,6 +59,8 @@ app.use("/api/burger-types", burgerTypeRoutes);
 app.use("/api/blog-categories", blogCategoryRoutes);
 
 app.use("/api/coupons", couponRoutes);
+
+app.use("/api/contact", contactRoutes);
 
 app.use("/api/orders", orderRoutes);
 
