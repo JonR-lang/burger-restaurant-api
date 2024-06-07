@@ -4,7 +4,7 @@ const sendEmail = async (data) => {
   console.log(data);
   const { fullName, email, subject, message } = data;
 
-  if (!email || !subject || !body)
+  if (!fullName || !email || !subject || !message)
     throw new Error("All fileds should be provided!");
 
   const transporter = nodemailer.createTransport({
