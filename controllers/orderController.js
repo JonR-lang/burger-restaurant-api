@@ -63,6 +63,7 @@ const createOrder = async (req, res) => {
     const paymentResponse = await paystack.transaction.initialize({
       email: user.email,
       amount: parseInt(totalAmount) * 100, //When using paystack, amount must be an integar and it is multiplied by 100, because it expects the amount in kobo.
+      currency: "USD",
       reference: uuidv4(), //If reference is not provided, an automatic reference is provided. It is with this reference that you would use to verify payment.
       // callback_url: `${process.env.CLIENT_URL}/cart`,
       metadata: {
