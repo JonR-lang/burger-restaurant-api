@@ -18,7 +18,6 @@ All endpoints in this API have a base path of `/api/`.
 For example, to GET all products(burgers) in the database, you would use [https://wajusoft-ecommerce-api.onrender.com/api/products](https://wajusoft-ecommerce-api.onrender.com/api/products).
 
 ## Overview
-
 This API is designed to provide a backend for a burger restaurant, allowing for the management of users, products, burger types, coupons, and orders. It utilizes Express.js for the server, and MongoDB as the database.
 
 The API includes the following features:
@@ -26,8 +25,12 @@ The API includes the following features:
 - User authentication and management
 - Product management
 - Burger type management
+- Blog management
+- Blog category management
 - Coupon management
+- Contact management
 - Order management
+- Newsletter management
 
 [View complete documentation](https://documenter.getpostman.com/view/31816174/2sA3BoZWTU).
 
