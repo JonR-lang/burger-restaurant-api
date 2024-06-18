@@ -43,6 +43,8 @@ app.use(morgan("common"));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
+  const postmanApiUrl = 'https://documenter.getpostman.com/view/31816174/2sA3BoZWTU'
+  res.redirect(postmanApiUrl)
   res.status(200).send("Server is up and running");
 });
 
